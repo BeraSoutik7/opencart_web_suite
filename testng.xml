@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All Test Suite">
+
+    <test verbose="2" preserve-order="true" name="OpenCart Sanity">
+
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="Windows"/>
+        <classes>
+            <class name="testCases.TC_LF_001_LogInTest">
+                <methods>
+                    <include name="verifyLogIn"/>
+                </methods>
+            </class>
+            <class name="testCases.TC_RF_001_AccountRegistrationTest">
+                <methods>
+                    <include name="verifyAccountRegistration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
