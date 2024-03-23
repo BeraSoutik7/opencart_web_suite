@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,8 +20,8 @@ public class LogInPage extends BasePage{
     WebElement warningMsg;
     @FindBy(xpath = "//div[@class='form-group']//a[normalize-space()='Forgotten Password']")
     WebElement forgetPassword;
-    @FindBy(xpath = "//h1[@class='page-title h3 mb-3']")
-    WebElement forgetPasswordMsg;
+
+
     public void setTxtEmail(String email){
         txtEmail.sendKeys(email);
     }
@@ -33,13 +34,15 @@ public class LogInPage extends BasePage{
     public boolean isWarningDisplayed(){
         return warningMsg.isDisplayed();
     }
-    public boolean isForgetPasswordDisplayed(){
-        return forgetPassword.isDisplayed();
-    }
     public void clickForgetPassword(){
         forgetPassword.click();
     }
-    public String getForgetPasswordMsg(){
-       return  forgetPasswordMsg.getText();
+
+    public String getPlaceHolderEmail(){
+        return txtEmail.getAttribute("placeholder");
     }
+    public String getPlaceHolderPassword(){
+        return txtPassword.getAttribute("placeholder");
+    }
+
 }

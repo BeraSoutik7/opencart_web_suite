@@ -9,10 +9,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import utilities.ExtentReportManager;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,11 +29,14 @@ import java.util.Random;
 //java -jar selenium-server-4.18.1.jar standalone
 
 
-public class BaseClass {
+public class BaseClass extends ExtentReportManager {
     public static WebDriver driver ;
     public Logger logger;
+    public static WebDriverWait myWait;
 
     static public Properties p;
+
+
     @BeforeClass(groups = {"sanity","regression","master"})
     @Parameters({"browser","os"})
     public void setUp(@Optional("chrome")String br, @Optional("windows")String os) throws IOException {
@@ -68,6 +73,7 @@ public class BaseClass {
                     System.out.println("No match for browser");
             }
             driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+
         } else if (p.getProperty("execution_env").equalsIgnoreCase("local")) {
             //local
             switch (br.toLowerCase()) {
@@ -89,7 +95,10 @@ public class BaseClass {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        myWait = new WebDriverWait(driver,Duration.ofSeconds(10));
         driver.get(p.getProperty("appUrl"));
+
+
     }
     @AfterClass(groups = {"sanity","regression","master"})
     public void tearDown(){
@@ -151,5 +160,20 @@ public class BaseClass {
         sourceFile.renameTo(targetFile);
 
         return targetFilePath;
+    }
+
+    public void pressTab() {
+        driver.switchTo().activeElement().sendKeys(Keys.TAB);
+    }
+    public void pressEnter() {
+        driver.switchTo().activeElement().sendKeys(Keys.ENTER);
+    }
+    public void pressBack(){
+        //driver.navigate().back();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.history.go(-1)");
+    }
+    public String getTitle(){
+        return driver.getTitle();
     }
 }
