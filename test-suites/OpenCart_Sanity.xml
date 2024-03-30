@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="utilities.ExtentReportManager"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="All LogIn Test">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="windows"></parameter>
+
+        <classes>
+                        <class name="testCases.TC_LF_001_LogInTest"/>
+                        <class name="testCases.TC_LF_002_LoginTestDD"/>
+                        <class name="testCases.TC_RF_001_AccountRegistrationTest"/>
+                        <class name="testCases.TC_SF_001_SearchTest"/>
+                        <class name="testCases.TC_PC_001_ProductCompare"/>
+                        <class name="testCases.TC_ATC_001_AddToCart"></class>
+
+
+        </classes>
+    </test>
+</suite>

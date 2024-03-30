@@ -1,30 +1,25 @@
 package testCases;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.HomePage;
 import pageObjects.LogInPage;
 import pageObjects.MyAccountPage;
+import pageObjects.SearchPage;
 import testBase.BaseClass;
 
-public class TC_LF_001_LogInTest extends BaseClass {
+import java.io.IOException;
 
-    @Test(groups = {"sanity","master"},description = "Login With valid credentials")
-    public void verifyLogIn(){
+public class TC_SF_001_SearchTest extends BaseClass {
+    @Test(groups = {"sanity"},description = "Search Test... of one product")
+    public void varifySearchTest() throws IOException {
         try {
-
             LogInPage logInPage = new LogInPage(driver);
-
             MyAccountPage myAccountPage = logInPage.logInWithValidCredentials();
-
-            boolean targetPage = myAccountPage.isMyAccountPageExists();
-            if (targetPage) {
-
+            SearchPage searchPage = myAccountPage.setSearchTxt();
+            boolean target = searchPage.isProductiMacExists();
+            if (target) {
                 Assert.assertTrue(true);
             } else {
-
                 Assert.assertTrue(false);
             }
         }
@@ -32,7 +27,5 @@ public class TC_LF_001_LogInTest extends BaseClass {
             System.out.println(e);
             Assert.assertTrue(false);
         }
-
-
     }
 }

@@ -1,14 +1,11 @@
 package testCases;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pageObjects.HomePage;
 import pageObjects.LogInPage;
 import pageObjects.MyAccountPage;
 import testBase.BaseClass;
-
-import java.util.Base64;
 
 public class TC_LF_009_LogInTest extends BaseClass {
     SoftAssert sa;

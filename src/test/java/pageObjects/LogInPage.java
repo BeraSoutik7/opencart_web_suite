@@ -5,24 +5,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 public class LogInPage extends BasePage{
 
     public LogInPage(WebDriver driver) {
         super(driver);
     }
     @FindBy(xpath = "//input[@id='input-email']")
-    WebElement txtEmail;
+    static WebElement txtEmail;
     @FindBy(xpath = "//input[@id='input-password']")
-    WebElement txtPassword;
+    static WebElement txtPassword;
     @FindBy(xpath = "//input[@value='Login']")
-    WebElement logInBtn;
+    static WebElement logInBtn;
     @FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
-    WebElement warningMsg;
+    static WebElement warningMsg;
     @FindBy(xpath = "//div[@class='form-group']//a[normalize-space()='Forgotten Password']")
-    WebElement forgetPassword;
+    static WebElement forgetPassword;
 
 
-    public void setTxtEmail(String email){
+    public  void setTxtEmail(String email){
         txtEmail.sendKeys(email);
     }
     public void setTxtPassword(String password){
@@ -44,5 +49,25 @@ public class LogInPage extends BasePage{
     public String getPlaceHolderPassword(){
         return txtPassword.getAttribute("placeholder");
     }
+    public  MyAccountPage logInWithValidCredentials() throws IOException {
+        HomePage homePage = new HomePage(driver);
+        FileReader file = new FileReader(".//src/test/java/resources/config.properties");
+        p = new Properties();
+        p.load(file);
+        homePage.clickMyAccount();
+        setTxtEmail(p.getProperty("email"));
+        setTxtPassword(p.getProperty("password"));
+        clickLogInBtn();
+        return new MyAccountPage(driver);
+    }
 
+    public MyAccountPage logInWithValidCredentials(String email, String password) {
+        HomePage homePage = new HomePage(driver);
+        p = new Properties();
+        homePage.clickMyAccount();
+        setTxtEmail(email);
+        setTxtPassword(password);
+        clickLogInBtn();
+        return new MyAccountPage(driver);
+    }
 }

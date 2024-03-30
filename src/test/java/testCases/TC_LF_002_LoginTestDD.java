@@ -11,31 +11,17 @@ import utilities.DataProviders;
 
 public class TC_LF_002_LoginTestDD extends BaseClass {
 
-    @Test(dataProvider = "LoginData",dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "LoginData",dataProviderClass = DataProviders.class,description = "Login with multiple valid and invalid credentials")
     public void varifyLogin_DDT(String email,String password, String exp){
         logger.info("Starting TC_LF_002_LoginTestDD");
         try {
-            logger.info("Starting TC_LF_001_LogInTest");
-            HomePage hp = new HomePage(driver);
-            LogInPage lp = new LogInPage(driver);
-            MyAccountPage ma = new MyAccountPage(driver);
+            LogInPage logInPage = new LogInPage(driver);
+            MyAccountPage myAccountPage = logInPage.logInWithValidCredentials(email,password);
 
-            hp.clickMyAccount();
-            logger.info("Clicked on My account");
-
-            lp.setTxtEmail(email);
-            logger.info("Entered Email");
-
-            lp.setTxtPassword(password);
-            logger.info("Entered Password");
-
-            lp.clickLogInBtn();
-            logger.info("Clicked on log in button");
-
-            boolean targetPage = ma.isMyAccountPageExists();
+            boolean targetPage = myAccountPage.isMyAccountPageExists();
             if(exp.equals("valid")){
                 if( targetPage==true) {
-                    ma.clickLogout();
+                    myAccountPage.clickLogout();
                     logger.info("Login Test passed....");
                     Assert.assertTrue(true);
                 }
@@ -46,7 +32,7 @@ public class TC_LF_002_LoginTestDD extends BaseClass {
             }
             if(exp.equals("invalid")){
                 if(targetPage==true){
-                    ma.clickLogout();
+                    myAccountPage.clickLogout();
                     logger.info("Login Test failed....");
                     Assert.assertTrue(false);
                 }

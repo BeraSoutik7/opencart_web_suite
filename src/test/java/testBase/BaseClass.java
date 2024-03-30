@@ -8,7 +8,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,6 +39,8 @@ public class BaseClass extends ExtentReportManager {
     @BeforeClass(groups = {"sanity","regression","master"})
     @Parameters({"browser","os"})
     public void setUp(@Optional("chrome")String br, @Optional("windows")String os) throws IOException {
+
+
         //loading properties file
         FileReader file = new FileReader(".//src/test/java/resources/config.properties");
         p = new Properties();
