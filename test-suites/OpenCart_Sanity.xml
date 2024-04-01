@@ -15,6 +15,7 @@
                         <class name="testCases.TC_SF_001_SearchTest"/>
                         <class name="testCases.TC_PC_001_ProductCompare"/>
                         <class name="testCases.TC_ATC_001_AddToCart"></class>
+                        <class name="testCases.TC_WL_001_WishList"></class>
 
 
         </classes>

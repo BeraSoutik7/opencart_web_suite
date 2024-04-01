@@ -19,6 +19,10 @@ public class SearchPage extends BasePage{
     WebElement product;
     @FindBy(xpath = "//a[@class='compare-total btn btn-link']")
     WebElement productCompare;
+    @FindBy(xpath = "//button[contains(@class,'btn btn-wishlist wishlist-41')]//i[@class='fas fa-heart']")
+    WebElement wishListbtn;
+    @FindBy(xpath = "//a[@class='btn btn-secondary btn-block']")
+    WebElement wishListOpen;
 
     public boolean isProductiMacExists(){
         try {
@@ -52,6 +56,15 @@ public class SearchPage extends BasePage{
     public ProductDisplayPage clickProduct(){
         product.click();
         return new ProductDisplayPage(driver);
+    }
+    public void clickWishlist(){
+        hoverOverElement(driver,product);
+        wishListbtn.click();
+    }
+    public MyWishListPage openWishList(){
+
+        wishListOpen.click();
+        return new MyWishListPage(driver);
     }
 
 }
