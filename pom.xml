@@ -30,7 +30,9 @@
                     <configuration>
 <!--                        <suiteXmlFiles>final.xml</suiteXmlFiles>-->
 <!--                        <suiteXmlFiles>testng.xml</suiteXmlFiles>-->
-                        <suiteXmlFiles>grouping.xml</suiteXmlFiles>
+<!--                        <suiteXmlFiles>grouping.xml</suiteXmlFiles>-->
+                           <suiteXmlFiles>test-suites/OpenCart_Sanity.xml</suiteXmlFiles>
+
                     </configuration>
                 </plugin>
             </plugins>
